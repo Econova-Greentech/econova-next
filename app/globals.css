@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@layer base {
+  html,
+  body {
+    @apply min-h-full;
+  }
+
+  body {
+    @apply font-sans;
+  }
+
+  a {
+    @apply no-underline;
+  }
+}

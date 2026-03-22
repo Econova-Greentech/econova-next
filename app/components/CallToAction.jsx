@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CallToAction() {
   return (
     <section className="w-full bg-[#e5efe7] px-6 py-14 lg:px-8">
@@ -24,18 +26,18 @@ export default function CallToAction() {
           are affordable, durable, and climate-conscious.
         </p>
         <div className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#"
+          <Link
+            href="/products"
             className="rounded-xl bg-emerald-400 px-7 py-3 text-lg font-semibold text-slate-950 transition hover:bg-emerald-300"
           >
             Explore Our Products
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/contact"
             className="rounded-xl border border-white/35 bg-white/5 px-7 py-3 text-lg font-semibold text-white transition hover:bg-white/15"
           >
             Schedule Consultation
-          </a>
+          </Link>
         </div>
       </div>
     </section>

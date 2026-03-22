@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -94,15 +95,15 @@ export default function ProductPage() {
                 </div>
 
                 <div className="mt-7 flex flex-wrap items-center gap-4">
-                  <a
-                    href="#"
+                  <Link
+                    href="/contact"
                     className="rounded-xl bg-emerald-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_8px_18px_-6px_rgba(16,185,129,0.9)] transition hover:bg-emerald-300"
                   >
                     Inquire Now →
-                  </a>
-                  <a href="#" className="text-sm font-semibold text-slate-500 transition hover:text-slate-700">
+                  </Link>
+                  <Link href="#" className="text-sm font-semibold text-slate-500 transition hover:text-slate-700">
                     Download Spec Sheet ↳
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -126,15 +127,15 @@ export default function ProductPage() {
                 </div>
 
                 <div className="mt-7 flex flex-wrap items-center gap-4">
-                  <a
-                    href="#"
+                  <Link
+                    href="/contact"
                     className="rounded-xl bg-emerald-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_8px_18px_-6px_rgba(16,185,129,0.9)] transition hover:bg-emerald-300"
                   >
                     Inquire Now →
-                  </a>
-                  <a href="#" className="text-sm font-semibold text-slate-500 transition hover:text-slate-700">
+                  </Link>
+                  <Link href="#" className="text-sm font-semibold text-slate-500 transition hover:text-slate-700">
                     Download Spec Sheet ↳
-                  </a>
+                  </Link>
                 </div>
               </div>
 

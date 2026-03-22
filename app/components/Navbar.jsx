@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Products", href: "/product" },
-  { label: "Sustainability", href: "/sustainablibty" },
+  { label: "Products", href: "/products" },
+  { label: "Sustainability", href: "/sustainability" },
   { label: "About Us", href: "/about" },
 ];
 
@@ -11,7 +12,7 @@ export default function Navbar() {
   return (
     <header className="w-full border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="flex w-full items-center justify-between px-6 py-3.5 lg:px-8">
-        <a className="shrink-0" href="#" aria-label="Econova home">
+        <Link className="shrink-0" href="/" aria-label="Econova home">
           <Image
             src="/Logo.png"
             alt="Econova logo"
@@ -19,25 +20,25 @@ export default function Navbar() {
             height={34}
             priority
           />
-        </a>
+        </Link>
 
         <nav
           className="hidden items-center gap-8 text-[13px] font-medium text-slate-600 md:flex"
           aria-label="Main navigation"
         >
           {navItems.map((item) => (
-            <a key={item.label} href={item.href} className="transition hover:text-slate-900">
+            <Link key={item.label} href={item.href} className="transition hover:text-slate-900">
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a
+        <Link
           className="rounded-lg bg-slate-950 px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-slate-800"
           href="/contact"
         >
           Get Quote
-        </a>
+        </Link>
       </div>
     </header>
   );

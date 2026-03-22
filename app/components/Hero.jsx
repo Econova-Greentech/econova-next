@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <section
@@ -26,18 +28,18 @@ export default function Hero() {
           specifically for the future of India&apos;s infrastructure.
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <a
-            href="#"
+          <Link
+            href="/contact"
             className="rounded-xl bg-emerald-500 px-8 py-4 text-lg font-semibold text-slate-950 transition hover:bg-emerald-400"
           >
             Contact Us
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/products"
             className="rounded-xl bg-white/75 px-8 py-4 text-lg font-semibold text-slate-700 transition hover:bg-white"
           >
             View Products
-          </a>
+          </Link>
         </div>
       </div>
     </section>

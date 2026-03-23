@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 export default function CallToAction() {
   return (
     <section className="w-full bg-[#e5efe7] px-6 py-14 lg:px-8">

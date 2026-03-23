@@ -1,5 +1,8 @@
+"use client"
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useState } from "react"
 
 function LabelPill() {
   return (
@@ -25,19 +28,6 @@ function ContactRow({ icon, title, value, hint }) {
   );
 }
 
-function Input({ label, placeholder, type = "text" }) {
-  return (
-    <label className="block">
-      <span className="mb-1.5 block text-xs font-semibold text-slate-700">{label}</span>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
-      />
-    </label>
-  );
-}
-
 function FaqCard({ question, answer }) {
   return (
     <article className="rounded-xl border border-slate-200 bg-white p-4">
@@ -48,6 +38,34 @@ function FaqCard({ question, answer }) {
 }
 
 export default function ContactPage() {
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [subject, setSubject] = useState("General Inquiry")
+  const [message, setMessage] = useState("")
+
+  const formSubmissionHandler = async (e) => {
+  try {
+    e.preventDefault()
+    const response = await fetch('/api/queries', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        subject: subject,
+        message: message
+      })
+    })
+    alert("Message sent successfully! We will get back to you shortly.")
+  } catch (error) {
+    alert("There was an error sending your message. Please try again later.")
+  }
+}
+
   return (
     <div className="min-h-screen bg-[#edf1ef] text-slate-900">
       <Navbar />
@@ -138,17 +156,44 @@ export default function ContactPage() {
                 Fill out the form below and we&apos;ll get back to you shortly.
               </p>
 
-              <form className="mt-6 space-y-4">
+              <form className="mt-6 space-y-4" onSubmit={formSubmissionHandler}>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Input label="First Name" placeholder="John" />
-                  <Input label="Last Name" placeholder="Doe" />
+                  <label className="block">
+                    <span className="mb-1.5 block text-xs font-semibold text-slate-700">First Name</span>
+                    <input
+                      type="text"
+                      placeholder="John"
+                      className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="mb-1.5 block text-xs font-semibold text-slate-700">Last Name</span>
+                    <input
+                      type="text"
+                      placeholder="Doe"
+                      className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                    />
+                  </label>
                 </div>
 
-                <Input label="Email Address" placeholder="john@example.com" type="email" />
+                <label className="block">
+                  <span className="mb-1.5 block text-xs font-semibold text-slate-700">Email Address</span>
+                  <input
+                    type="email"
+                    placeholder="john@example.com"
+                    className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </label>
 
                 <label className="block">
                   <span className="mb-1.5 block text-xs font-semibold text-slate-700">Subject</span>
-                  <select className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100">
+                  <select className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100" onChange={(e) => setSubject(e.target.value)} required>
                     <option>General Inquiry</option>
                     <option>Product Details</option>
                     <option>Bulk Pricing</option>
@@ -162,15 +207,14 @@ export default function ContactPage() {
                     rows={4}
                     placeholder="How can we help you today?"
                     className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
                   />
                 </label>
 
-                <button
+                <input
                   type="submit"
-                  className="h-10 w-full rounded-lg bg-slate-950 text-xs font-semibold text-white transition hover:bg-slate-800"
-                >
-                  Send Message ▶
-                </button>
+                  className="h-10 w-full rounded-lg bg-slate-950 text-xs font-semibold text-white transition hover:bg-slate-800 cursor-pointer" value="Send Message ▶" />
               </form>
             </article>
           </div>

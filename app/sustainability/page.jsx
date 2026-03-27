@@ -18,10 +18,8 @@ const pillars = [
 ];
 
 const leaders = [
-  { name: "Dr. Aditi Rao", role: "Chief Executive" },
-  { name: "Rajesh Kumar", role: "Head of Operations" },
-  { name: "Saanvi Jogi", role: "Sustainability Lead" },
-  { name: "Vikram Singh", role: "Technology Lead" },
+  { name: "Bhau", role: "Founder, CEO" },
+  { name: "Vaibhav", role: "Co-Founder, CTO" },
 ];
 
 function FeatureCard({ title, text }) {
@@ -91,12 +89,6 @@ export default function SustainabilityPage() {
                 >
                   Our Mission
                 </a>
-                <a
-                  href="#"
-                  className="rounded-lg border border-white/40 bg-white/10 px-4 py-2 text-xs font-semibold text-white transition hover:bg-white/20"
-                >
-                  Watch Video
-                </a>
               </div>
             </div>
           </div>
@@ -131,13 +123,6 @@ export default function SustainabilityPage() {
               <ProgressRow label="Plastic Waste Reduction" value={88} />
               <ProgressRow label="Green Supply Adoption" value={74} />
             </div>
-
-            <a
-              href="/contact"
-              className="mt-5 inline-flex rounded-full border border-emerald-300 bg-emerald-50 px-4 py-2 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100"
-            >
-              Find Out What&apos;s New
-            </a>
           </article>
 
           <article className="rounded-2xl bg-white p-4 shadow-[0_14px_24px_-18px_rgba(15,23,42,0.45)]">
@@ -163,23 +148,28 @@ export default function SustainabilityPage() {
             The minds helping the green transition
           </p>
 
-          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 flex flex-wrap justify-center gap-6">
             {leaders.map((leader) => (
               <article
                 key={leader.name}
-                className="rounded-2xl bg-white p-4 text-center shadow-[0_14px_24px_-18px_rgba(15,23,42,0.45)]"
+                className="group w-full max-w-[280px] rounded-2xl bg-white p-6 text-center shadow-[0_14px_24px_-18px_rgba(15,23,42,0.45)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-900/5"
               >
-                <span className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-200 text-sm font-semibold text-slate-700">
-                  {leader.name
-                    .split(" ")
-                    .map((part) => part[0])
-                    .join("")
-                    .slice(0, 2)}
-                </span>
-                <h3 className="mt-3 text-sm font-semibold text-slate-900">{leader.name}</h3>
-                <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-600">
+                <div className="relative mx-auto h-20 w-20">
+                  <span className="flex h-full w-full items-center justify-center rounded-full bg-emerald-50 text-xl font-bold text-emerald-700 ring-4 ring-emerald-50/50 transition-colors group-hover:bg-emerald-100">
+                    {leader.name
+                      .split(" ")
+                      .map((part) => part[0])
+                      .join("")
+                      .slice(0, 2)}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-base font-bold text-slate-900">{leader.name}</h3>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-emerald-600">
                   {leader.role}
                 </p>
+                <div className="mt-4 flex justify-center gap-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="h-1 w-12 rounded-full bg-emerald-100" />
+                </div>
               </article>
             ))}
           </div>

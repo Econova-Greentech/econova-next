@@ -27,16 +27,16 @@ export default function Hero() {
           Innovating construction with eco-friendly solutions designed
           specifically for the future of India&apos;s infrastructure.
         </p>
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link
             href="/contact"
-            className="rounded-xl bg-emerald-500 px-8 py-4 text-lg font-semibold text-slate-950 transition hover:bg-emerald-400"
+            className="inline-flex items-center rounded-lg bg-emerald-500 px-7 py-3.5 text-base font-semibold text-slate-950 transition hover:bg-emerald-400"
           >
             Contact Us
           </Link>
           <Link
             href="/products"
-            className="rounded-xl bg-white/75 px-8 py-4 text-lg font-semibold text-slate-700 transition hover:bg-white"
+            className="inline-flex items-center rounded-lg border border-white/30 bg-white/10 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
           >
             View Products
           </Link>

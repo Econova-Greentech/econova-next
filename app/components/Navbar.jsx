@@ -18,6 +18,7 @@ export default function Navbar() {
             alt="Econova logo"
             width={128}
             height={34}
+            style={{ height: "auto" }}
             priority
           />
         </Link>

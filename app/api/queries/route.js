@@ -7,7 +7,6 @@ export async function GET() {
   try {
     await connectMongoDB()
     const queries = await Queries.find().sort({ createdAt: -1 })
-    console.log(queries)
     return NextResponse.json(queries, { status: 200 })
   } catch (error) {
     console.error("ERROR:", error)

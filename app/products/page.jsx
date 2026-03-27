@@ -24,14 +24,16 @@ function FeaturePill({ title, subtitle, tone = "emerald" }) {
         : "bg-emerald-50 text-emerald-600";
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4">
-      <span className={`mb-2 inline-flex h-6 w-6 items-center justify-center rounded-full ${toneClass}`}>
-        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2">
+    <div className="flex items-start gap-4 rounded-xl border border-slate-200 bg-white p-4">
+      <span className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${toneClass}`}>
+        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
         </svg>
       </span>
-      <p className="text-sm font-semibold text-slate-900">{title}</p>
-      <p className="mt-1 text-xs text-slate-500">{subtitle}</p>
+      <div>
+        <p className="text-sm font-semibold text-slate-900">{title}</p>
+        <p className="mt-0.5 text-xs text-slate-500 leading-relaxed">{subtitle}</p>
+      </div>
     </div>
   );
 }
@@ -43,7 +45,6 @@ export default function ProductPage() {
 
       <main className="w-full px-6 pb-20 pt-12 lg:px-24">
         <section className="w-full">
-          <Badge text="Green Technology" />
           <div className="mt-5 flex w-full flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <h1 className="text-5xl font-bold leading-[1.02] text-slate-900 lg:text-7xl">
               Sustainable <span className="text-emerald-500">Solutions</span>
@@ -101,7 +102,11 @@ export default function ProductPage() {
                   >
                     Inquire Now →
                   </Link>
-                  <Link href="#" className="text-sm font-semibold text-slate-500 transition hover:text-slate-700">
+                  <Link
+                    href="/spec-sheet/spec-sheet.pdf"
+                    download="Econova_Spec_Sheet.pdf"
+                    className="text-sm font-semibold text-slate-500 transition hover:text-slate-700"
+                  >
                     Download Spec Sheet ↳
                   </Link>
                 </div>
@@ -133,7 +138,11 @@ export default function ProductPage() {
                   >
                     Inquire Now →
                   </Link>
-                  <Link href="#" className="text-sm font-semibold text-slate-500 transition hover:text-slate-700">
+                  <Link
+                    href="/spec-sheet/spec-sheet.pdf"
+                    download="Econova_Spec_Sheet.pdf"
+                    className="text-sm font-semibold text-slate-500 transition hover:text-slate-700"
+                  >
                     Download Spec Sheet ↳
                   </Link>
                 </div>

@@ -16,7 +16,7 @@ function LabelPill() {
 function ContactRow({ icon, title, value, hint }) {
   return (
     <div className="flex items-start gap-2.5">
-      <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
+      <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
         {icon}
       </span>
       <div>
@@ -37,38 +37,71 @@ function FaqCard({ question, answer }) {
   );
 }
 
+function SuccessModal({ onClose }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300">
+      <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl border border-emerald-50 transform transition-all duration-300 scale-100 flex flex-col items-center text-center scale-up-center">
+        <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6 animate-bounce">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+        </div>
+        <h3 className="text-2xl font-bold text-slate-900 mb-2">Message Sent!</h3>
+        <p className="text-slate-500 mb-8 px-2">
+          Thank you for reaching out. We have received your query and will get back to you soon through email.
+        </p>
+        <button
+          onClick={onClose}
+          className="w-full bg-slate-100 text-slate-900 py-4 rounded-2xl font-bold hover:bg-emerald-500 hover:text-white transition-all shadow-sm"
+        >
+          Ok
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function ContactPage() {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [subject, setSubject] = useState("General Inquiry")
   const [message, setMessage] = useState("")
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   const formSubmissionHandler = async (e) => {
-  try {
     e.preventDefault()
-    const response = await fetch('/api/queries', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        subject: subject,
-        message: message
+    try {
+      setSubmitting(true)
+      const response = await fetch('/api/queries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          subject: subject,
+          message: message
+        })
       })
-    })
-    alert("Message sent successfully! We will get back to you shortly.")
-  } catch (error) {
-    alert("There was an error sending your message. Please try again later.")
+
+      if (!response.ok) throw new Error('Failed to send message')
+
+      setShowSuccess(true)
+      // Reset form (optional but recommended)
+      e.target.reset()
+    } catch (error) {
+      alert("There was an error sending your message. Please try again later.")
+    } finally {
+      setSubmitting(false)
+    }
   }
-}
 
   return (
     <div className="min-h-screen bg-[#edf1ef] text-slate-900">
       <Navbar />
+      {showSuccess && <SuccessModal onClose={() => setShowSuccess(false)} />}
 
       <main className="w-full">
         <section className="w-full px-6 pb-8 pt-8 lg:px-12 lg:pb-10 lg:pt-10">
@@ -108,40 +141,36 @@ export default function ContactPage() {
                   value="contact@econova.in"
                   hint="We typically reply within 2 hours."
                   icon={
-                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M3 6h18v12H3z" />
-                      <path d="M3 8l9 6 9-6" />
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="5" width="18" height="14" rx="2" />
+                      <polyline points="3 7 12 13 21 7" />
                     </svg>
                   }
                 />
 
                 <ContactRow
                   title="Call Us"
-                  value="+91 98765 43210"
+                  value="+91 91369 07789"
                   hint="Mon - Fri, 9am to 6pm IST."
                   icon={
-                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.7 2.6a2 2 0 0 1-.5 2L9.1 10.5a16 16 0 0 0 4.4 4.4l1.2-1.2a2 2 0 0 1 2-.5c.8.4 1.7.6 2.6.7a2 2 0 0 1 1.7 2z" />
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6.6 10.8a15.3 15.3 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.5 11.5 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.6 3.6a1 1 0 0 1-.25 1L6.6 10.8z" />
                     </svg>
                   }
                 />
 
                 <ContactRow
                   title="Visit Us"
-                  value="123 Green Tech Park, Bangalore, India"
+                  value="Mumbai, India"
                   hint=""
                   icon={
-                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 22s7-5 7-12a7 7 0 1 0-14 0c0 7 7 12 7 12z" />
-                      <circle cx="12" cy="10" r="2.5" />
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 21c-4-4-7-7.5-7-11a7 7 0 0 1 14 0c0 3.5-3 7-7 11z" />
+                      <circle cx="12" cy="10" r="2" />
                     </svg>
                   }
                 />
               </div>
-
-              <button className="mt-6 rounded-lg bg-slate-100 px-5 py-3 text-xs font-semibold text-slate-700 transition hover:bg-slate-200">
-                View on Map
-              </button>
             </article>
 
             <article
@@ -162,7 +191,7 @@ export default function ContactPage() {
                     <span className="mb-1.5 block text-xs font-semibold text-slate-700">First Name</span>
                     <input
                       type="text"
-                      placeholder="John"
+                      placeholder="First name"
                       className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
                       onChange={(e) => setFirstName(e.target.value)}
                       required
@@ -172,7 +201,7 @@ export default function ContactPage() {
                     <span className="mb-1.5 block text-xs font-semibold text-slate-700">Last Name</span>
                     <input
                       type="text"
-                      placeholder="Doe"
+                      placeholder="Last name"
                       className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
                       onChange={(e) => setLastName(e.target.value)}
                       required
@@ -184,7 +213,7 @@ export default function ContactPage() {
                   <span className="mb-1.5 block text-xs font-semibold text-slate-700">Email Address</span>
                   <input
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder="name@example.com"
                     className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700 outline-none transition focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100"
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -212,9 +241,17 @@ export default function ContactPage() {
                   />
                 </label>
 
-                <input
+                <button
                   type="submit"
-                  className="h-10 w-full rounded-lg bg-slate-950 text-xs font-semibold text-white transition hover:bg-slate-800 cursor-pointer" value="Send Message ▶" />
+                  disabled={submitting}
+                  className="h-10 w-full rounded-lg bg-slate-950 text-xs font-semibold text-white transition hover:bg-slate-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {submitting ? (
+                    <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    "Send Message"
+                  )}
+                </button>
               </form>
             </article>
           </div>

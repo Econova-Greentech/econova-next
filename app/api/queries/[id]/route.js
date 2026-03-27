@@ -40,8 +40,7 @@ export async function PUT(req, { params }) {
     const allowedStatuses = [
       "Pending",
       "Under Review",
-      "Approved",
-      "Rejected"
+      "Completed"
     ]
     if (!allowedStatuses.includes(status)) {
       return NextResponse.json(
@@ -69,3 +68,32 @@ export async function PUT(req, { params }) {
     )
   }
 }
+
+// Delete a Query
+export async function DELETE(req, { params }) {
+  try {
+    await connectMongoDB();
+    const { id } = await params;
+
+    const deletedQuery = await Queries.findByIdAndDelete(id);
+
+    if (!deletedQuery) {
+      return NextResponse.json(
+        { error: "Query not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: "Query deleted successfully" },
+      { status: 200 }
+    );
+
+  } catch (error) {
+    console.error("ERROR:", error);
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  }
+}

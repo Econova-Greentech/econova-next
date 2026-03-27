@@ -45,6 +45,7 @@ QueriesSchema.pre('save', async function () {
   this._id = `QRY${String(counter.seq).padStart(4, '0')}`;
 })
 
-QueriesSchema.index({ _id: 1 }, { unique: true })
+// Remove redundant index call as MongoDB does this by default
+// QueriesSchema.index({ _id: 1 }, { unique: true })
 
 export default mongoose.models.Queries || mongoose.model('Queries', QueriesSchema)

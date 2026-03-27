@@ -15,7 +15,7 @@ export default function Home() {
           <Hero />
         </div>
         <WhyChoose />
-        <Stats />
+        {/* <Stats /> */}
         <CallToAction />
       </main>
       <Footer />

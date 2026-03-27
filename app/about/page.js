@@ -66,7 +66,7 @@ export default function AboutPage() {
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="/contact"
+              href="/products"
               className="rounded-lg bg-emerald-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
             >
               Our Technology

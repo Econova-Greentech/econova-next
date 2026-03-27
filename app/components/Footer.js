@@ -10,14 +10,44 @@ export default function Footer() {
             alt="Econova logo"
             width={126}
             height={34}
+            style={{ height: "auto" }}
           />
           <p className="mt-3 text-base leading-7 text-slate-600">
             Building a sustainable tomorrow with innovative green materials for
             the modern world.
           </p>
           <div className="mt-4 flex items-center gap-3 text-slate-500">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-slate-100 text-sm">𝕏</span>
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-slate-100 text-sm">in</span>
+            {/* X (Twitter) — replace href with your profile URL */}
+            <a
+              href="https://x.com/yourhandle"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow us on X"
+              className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-slate-100 text-sm transition hover:bg-slate-200 hover:text-slate-900"
+            >
+              𝕏
+            </a>
+            {/* LinkedIn — replace href with your company page URL */}
+            <a
+              href="https://linkedin.com/company/yourcompany"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Connect on LinkedIn"
+              className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-slate-100 text-sm transition hover:bg-slate-200 hover:text-slate-900"
+            >
+              in
+            </a>
+            {/* Email — replace with your actual email address */}
+            <a
+              href="mailto:hello@econova.in"
+              aria-label="Send us an email"
+              className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-slate-100 text-sm transition hover:bg-slate-200 hover:text-slate-900"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                <path d="M3 4a2 2 0 0 0-2 2v.217l9 5.25 9-5.25V6a2 2 0 0 0-2-2H3Z" />
+                <path d="m19 8.482-8.565 4.997a1 1 0 0 1-.87 0L1 8.482V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.482Z" />
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -25,13 +55,13 @@ export default function Footer() {
           <h4 className="text-sm font-bold uppercase tracking-[0.08em] text-slate-900">
             Company
           </h4>
-          <a href="#" className="transition hover:text-slate-900">
+          <a href="/about" className="transition hover:text-slate-900">
             About
           </a>
-          <a href="#" className="transition hover:text-slate-900">
+          <a href="/contact" className="transition hover:text-slate-900">
             Careers
           </a>
-          <a href="#" className="transition hover:text-slate-900">
+          <a href="/contact" className="transition hover:text-slate-900">
             Contact
           </a>
         </div>
@@ -46,7 +76,7 @@ export default function Footer() {
           <a href="#" className="transition hover:text-slate-900">
             Case Studies
           </a>
-          <a href="#" className="transition hover:text-slate-900">
+          <a href="/contact" className="transition hover:text-slate-900">
             Support
           </a>
         </div>
@@ -56,12 +86,10 @@ export default function Footer() {
             Contact
           </h4>
           <a href="#" className="transition hover:text-slate-900">
-            123 Green Tech Park,
-            <br />
-            Bangalore, KA 560001
+            Mumbai, India
           </a>
           <a href="tel:+918888888888" className="transition hover:text-slate-900">
-            +91 98765 43210
+            +91 91369 07789
           </a>
           <a
             href="mailto:hello@econova.in"
